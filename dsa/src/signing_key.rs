@@ -19,7 +19,7 @@ use zeroize::{Zeroize, Zeroizing};
 ///
 /// The [`(try_)sign_digest_with_rng`](::signature::RandomizedDigestSigner) API uses regular non-deterministic signatures,
 /// while the [`(try_)sign_digest`](::signature::DigestSigner) API uses deterministic signatures as described in RFC 6979
-#[derive(Clone, PartialEq)]
+#[derive(Clone, Eq, PartialEq)]
 #[must_use]
 pub struct SigningKey {
     /// Public key
@@ -120,6 +120,13 @@ where
 
         self.sign_prehashed(ks, &hash)
             .ok_or_else(signature::Error::new)
+    }
+}
+
+#[cfg(feature = "preferred")]
+impl signature::Signer<Signature> for SigningKey {
+    fn try_sign(&self, msg: &[u8]) -> Result<Signature, signature::Error> {
+        self.try_sign_digest(sha1::Sha1::new_with_prefix(msg))
     }
 }
 

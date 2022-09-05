@@ -22,6 +22,7 @@ opaque-debug = "0.3"
 pkcs8 = { version = "0.9", default-features = false, features = ["alloc"] }
 rand = { version = "0.8", default-features = false }
 rfc6979 = { version = "0.3", path = "../rfc6979" }
+sha1 = { version = "0.10", optional = true, default-features = false }
 signature = { version = ">= 1.5, < 1.7", default-features = false, features = ["digest-preview", "rand-preview"] }
 zeroize = { version = "1.5", default-features = false }
 
@@ -31,3 +32,6 @@ rand = "0.8"
 rand_chacha = "0.3"
 sha1 = "0.10"
 sha2 = "0.10"
+
+[features]
+preferred = ["sha1"]

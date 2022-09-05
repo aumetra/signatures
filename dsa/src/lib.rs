@@ -8,6 +8,10 @@
 )]
 
 //!
+//! Note: Implementations of the [`Signer`](::signature::Signer) and [`Verifier`](::signature::Verifier) traits are gated behind the `preferred` feature flag.
+//! These implementations use the SHA-1 hash function internally.
+//! This is not an endorsement of the security on SHA-1, it's the default because DSA is most commonly found in conjunction with SHA-1 in the wild.
+//!
 //! # Examples
 //!
 //! Generate a DSA keypair

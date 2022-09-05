@@ -11,7 +11,7 @@ use rand::{CryptoRng, RngCore};
 /// The common components of an DSA keypair
 ///
 /// (the prime p, quotient q and generator g)
-#[derive(Clone, PartialEq, PartialOrd)]
+#[derive(Clone, Eq, PartialEq, PartialOrd)]
 #[must_use]
 pub struct Components {
     /// Prime p

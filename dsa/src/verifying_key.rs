@@ -14,7 +14,7 @@ use pkcs8::{
 use signature::DigestVerifier;
 
 /// DSA public key.
-#[derive(Clone, PartialEq, PartialOrd)]
+#[derive(Clone, Eq, PartialEq, PartialOrd)]
 #[must_use]
 pub struct VerifyingKey {
     /// common components
@@ -91,6 +91,13 @@ where
         }
 
         Ok(())
+    }
+}
+
+#[cfg(feature = "preferred")]
+impl signature::Verifier<Signature> for VerifyingKey {
+    fn verify(&self, msg: &[u8], signature: &Signature) -> Result<(), signature::Error> {
+        self.verify_digest(sha1::Sha1::new_with_prefix(msg), signature)
     }
 }
 
